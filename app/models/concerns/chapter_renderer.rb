@@ -51,9 +51,9 @@ class ChapterRenderer < Redcarpet::Render::HTML
 
   end
 
-  # def paragraph(text)
-
-  # end
+  def paragraph(text)
+    return text
+  end
 
   def table(header, body)
     -raise
