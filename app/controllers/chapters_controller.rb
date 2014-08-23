@@ -28,15 +28,15 @@ class ChaptersController < ApplicationController
     @md = params[:md]
 
     #redCarpet
-    renderer = Redcarpet::Render::HTML.new
+    renderer = ChapterRenderer
     markdown = Redcarpet::Markdown.new(renderer, extensions = {})
     convert_text = markdown.render(@md)
 
-    @chapter.name = "hoge"
+    # @chapter.name = convert_text.match(%r{<h1>(.+?)</h1>})[1]
 
     respond_to do |format|
       if @chapter.save
-        format.html { redirect_to @chapter, notice: @chapter.id}
+        format.html { redirect_to @chapter, notice: convert_text}
         format.json { render :show, status: :created, location: @chapter }
       else
         format.html { render :new }

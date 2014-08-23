@@ -8,6 +8,7 @@
 
   - @chapters.each do |chapter|
     %tr
+      %td= chapter.name
       %td= link_to 'Show', chapter
       %td= link_to 'Edit', edit_chapter_path(chapter)
       %td= link_to 'Destroy', chapter, :method => :delete, :data => { :confirm => 'Are you sure?' }
