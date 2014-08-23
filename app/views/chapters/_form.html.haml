@@ -9,7 +9,7 @@
 /     = f.submit 'Save'
 
 = form_tag(action: "create") do
-  = text_field_tag(:md)
+  = text_area_tag(:md)
   = submit_tag("save")
 / = form_tag({controller: "chapter", action: "create"}, method: "post") do
 /   = label_tag(:hoge, "テキストエリア")
