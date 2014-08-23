@@ -1,10 +1,17 @@
-= form_for @chapter do |f|
-  - if @chapter.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@chapter.errors.count, "error")} prohibited this chapter from being saved:"
-      %ul
-        - @chapter.errors.full_messages.each do |msg|
-          %li= msg
+/ = form_for @chapter do |f|
+/   - if @chapter.errors.any?
+/     #error_explanation
+/       %h2= "#{pluralize(@chapter.errors.count, "error")} prohibited this chapter from being saved:"
+/       %ul
+/         - @chapter.errors.full_messages.each do |msg|
+/           %li= msg
+/   .actions
+/     = f.submit 'Save'
 
-  .actions
-    = f.submit 'Save'
+= form_tag(action: "create") do
+  = text_field_tag(:md)
+  = submit_tag("save")
+/ = form_tag({controller: "chapter", action: "create"}, method: "post") do
+/   = label_tag(:hoge, "テキストエリア")
+/   = text_field_tag(:hoge)
+/   = submit_tag("送信")

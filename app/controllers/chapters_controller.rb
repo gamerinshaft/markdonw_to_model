@@ -25,10 +25,11 @@ class ChaptersController < ApplicationController
   # POST /chapters.json
   def create
     @chapter = Chapter.new(chapter_params)
+    @md = params[:md]
 
     respond_to do |format|
       if @chapter.save
-        format.html { redirect_to @chapter, notice: 'Chapter was successfully created.' }
+        format.html { redirect_to @chapter, notice: @md }
         format.json { render :show, status: :created, location: @chapter }
       else
         format.html { render :new }
