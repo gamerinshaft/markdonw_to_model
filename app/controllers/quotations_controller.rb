@@ -69,6 +69,6 @@ class QuotationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quotation_params
-      params.require(:quotation).permit(:chapter_id, :order, :content)
+      params.require(:quotation).permit(:order, :content)
     end
 end

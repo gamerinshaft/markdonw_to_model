@@ -69,6 +69,6 @@ class HeadingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def heading_params
-      params.require(:heading).permit(:chapter_id, :order, :content)
+      params.require(:heading).permit(:order, :content)
     end
 end
