@@ -1,7 +1,7 @@
 class ChaptersController < ApplicationController
   before_action :set_chapter, only: [ :edit, :update, :destroy, :show]
-  before_action :nodes, only: [:show]
-  before_action :nodes_to_md, only: [:to_md]
+  before_action :nodes, only: [:show, :to_md]
+  # before_action :nodes_to_md, only: [:to_md]
 
   # GET /chapters
   # GET /chapters.json
@@ -98,32 +98,32 @@ class ChaptersController < ApplicationController
     @nodes = @nodes.sort { |x,y| x.order <=> y.order }
   end
 
-  def nodes_to_md
-    @chapters = Chapter.includes(:quotations, :headings, :codes, :urls).find(params[:id])
-    @nodes = []
-    @heads  = @chapters.headings
-    @codes  = @chapters.codes
-    @quotes = @chapters.quotations
-    @urls   = @chapters.urls
+  # def nodes_to_md
+  #   @chapters = Chapter.includes(:quotations, :headings, :codes, :urls).find(params[:id])
+  #   @nodes = []
+  #   @heads  = @chapters.headings
+  #   @codes  = @chapters.codes
+  #   @quotes = @chapters.quotations
+  #   @urls   = @chapters.urls
 
-    @codes.each do |hoge|
-      hoge.content = "\n```\n#{hoge.content}\n```\n"
-      @nodes.push hoge
-    end
-    @heads.each do |hoge|
-      hoge.content = "\n###{hoge.content}\n"
-      @nodes.push hoge
-    end
-    @quotes.each do |hoge|
-      hoge.content = "\n>#{hoge.content}\n"
-      @nodes.push hoge
-    end
-    @urls.each do |hoge|
-      hoge.content = "\n#{hoge.content}\n"
-      @nodes.push hoge
-    end
-    @nodes = @nodes.sort { |x,y| x.order <=> y.order }
-  end
+  #   @codes.each do |hoge|
+  #     hoge.content = "\n```\n#{hoge.content}\n```\n"
+  #     @nodes.push hoge
+  #   end
+  #   @heads.each do |hoge|
+  #     hoge.content = "\n###{hoge.content}\n"
+  #     @nodes.push hoge
+  #   end
+  #   @quotes.each do |hoge|
+  #     hoge.content = "\n>#{hoge.content}\n"
+  #     @nodes.push hoge
+  #   end
+  #   @urls.each do |hoge|
+  #     hoge.content = "\n#{hoge.content}\n"
+  #     @nodes.push hoge
+  #   end
+  #   @nodes = @nodes.sort { |x,y| x.order <=> y.order }
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

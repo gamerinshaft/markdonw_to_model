@@ -2,8 +2,35 @@
 
 %p
   - @nodes.each do |node|
-    %h4
-      = node.content
+    - case node
+
+    - when Url
+      %h4
+        #{node.content}(#{node.link})
+
+    - when Heading
+      - if node.level == 2
+        %h1
+          = node.content
+      - elsif node.level == 3
+        %h2
+          = node.content
+      -else
+        %h3
+          = node.content
+
+    - when Quotation
+      %h4
+        "#{node.content}"
+
+    - when Code
+      %h4
+        #{node.content}
+
+    - else
+      %h4
+        = node.class
+
 
 
 %div{style: "text-align: center"}
@@ -12,5 +39,3 @@
   = link_to 'Back', chapters_path
   \|
   = link_to 'Export', to_md_chapter_path(@chapter)
-
-
