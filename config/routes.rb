@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :chapters
+  resources :chapters do
+    member do
+      get :to_md
+    end
+  end
 
   resources :codes
 

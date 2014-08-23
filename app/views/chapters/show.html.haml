@@ -1,19 +1,16 @@
 %p#notice= notice
 
-%p Chapter名:
-= @chapter.name
-%h1 code
-- @chapter.codes.each do |code|
-  %p #{code.content}
-%h1 url
-- @chapter.urls.each do |url|
-  %p #{url.content}
-%h1 quote
-- @chapter.quotations.each do |quote|
-  %p #{quote.content}
-%h1 head
-- @chapter.headings.each do |head|
-  %p #{head.content}
-= link_to 'Edit', edit_chapter_path(@chapter)
-\|
-= link_to 'Back', chapters_path
+%p
+  - @nodes.each do |node|
+    %h4
+      = node.content
+
+
+%div{style: "text-align: center"}
+  = link_to 'Edit', edit_chapter_path(@chapter)
+  \|
+  = link_to 'Back', chapters_path
+  \|
+  = link_to 'Export', to_md_chapter_path(@chapter)
+
+
