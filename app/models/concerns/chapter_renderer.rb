@@ -6,8 +6,9 @@ class ChapterRenderer < Redcarpet::Render::HTML
   end
 
   def block_quote(quote)
-    -raise
-
+    chapter.quotations.build content: quote, order: node_count
+    succ_node_count
+    nil
   end
 
   def block_html(raw_html)
@@ -26,8 +27,12 @@ class ChapterRenderer < Redcarpet::Render::HTML
   end
 
   def header(text, header_level)
-    chapter.headings.build content: text, order: node_count
-    succ_node_count
+    if header_level == 1
+      chapter.name = text
+    else
+      chapter.headings.build content: header_level, order: node_count
+      succ_node_count
+    end
     nil
   end
 
@@ -97,8 +102,9 @@ class ChapterRenderer < Redcarpet::Render::HTML
   end
 
   def link(link, title, content)
-
-
+    chapter.urls.build content: "#{content}(#{link})", order: node_count
+    succ_node_count
+    nil
   end
 
   def raw_html(raw_html)
