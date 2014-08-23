@@ -1,5 +1,7 @@
 class ChaptersController < ApplicationController
-  before_action :set_chapter, only: [:show, :edit, :update, :destroy]
+  before_action :set_chapter, only: [ :edit, :update, :destroy, :show]
+  before_action :nodes, only: [:show]
+  before_action :nodes_to_md, only: [:to_md]
 
   # GET /chapters
   # GET /chapters.json
@@ -10,8 +12,6 @@ class ChaptersController < ApplicationController
   # GET /chapters/1
   # GET /chapters/1.json
   def show
-    @chapter = Chapter.find(params[:id])
-    # @chapter.headings.find(params[:id])
   end
 
   # GET /chapters/new
@@ -39,7 +39,7 @@ class ChaptersController < ApplicationController
 
     respond_to do |format|
       if @chapter.save
-        format.html { redirect_to @chapter, notice: convert_text}
+        format.html { redirect_to @chapter}
         format.json { render :show, status: :created, location: @chapter }
       else
         format.html { render :new }
@@ -70,6 +70,59 @@ class ChaptersController < ApplicationController
       format.html { redirect_to chapters_url, notice: 'Chapter was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def to_md
+  end
+
+  def nodes
+    @chapters = Chapter.includes(:quotations, :headings, :codes, :urls).find(params[:id])
+    @nodes = []
+    @heads  = @chapters.headings
+    @codes  = @chapters.codes
+    @quotes = @chapters.quotations
+    @urls   = @chapters.urls
+
+    @codes.each do |hoge|
+      @nodes.push hoge
+    end
+    @heads.each do |hoge|
+      @nodes.push hoge
+    end
+    @quotes.each do |hoge|
+      @nodes.push hoge
+    end
+    @urls.each do |hoge|
+      @nodes.push hoge
+    end
+    @nodes = @nodes.sort { |x,y| x.order <=> y.order }
+  end
+
+  def nodes_to_md
+    @chapters = Chapter.includes(:quotations, :headings, :codes, :urls).find(params[:id])
+    @nodes = []
+    @heads  = @chapters.headings
+    @codes  = @chapters.codes
+    @quotes = @chapters.quotations
+    @urls   = @chapters.urls
+
+    @codes.each do |hoge|
+      hoge.content = "\n```\n#{hoge.content}\n```\n"
+      @nodes.push hoge
+    end
+    @heads.each do |hoge|
+      hoge.content = "\n###{hoge.content}\n"
+      @nodes.push hoge
+    end
+    @quotes.each do |hoge|
+      hoge.content = "\n>#{hoge.content}\n"
+      @nodes.push hoge
+    end
+    @urls.each do |hoge|
+      hoge.content = "\n#{hoge.content}\n"
+      @nodes.push hoge
+    end
+    @nodes = @nodes.sort { |x,y| x.order <=> y.order }
   end
 
   private
