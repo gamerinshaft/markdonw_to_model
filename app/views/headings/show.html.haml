@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Chapter:
+  = @heading.chapter_id
+%p
+  %b Order:
+  = @heading.order
+%p
+  %b Content:
+  = @heading.content
+
+= link_to 'Edit', edit_heading_path(@heading)
+\|
+= link_to 'Back', headings_path

@@ -1,0 +1,23 @@
+%h1 Listing headings
+
+%table
+  %tr
+    %th Chapter
+    %th Order
+    %th Content
+    %th
+    %th
+    %th
+
+  - @headings.each do |heading|
+    %tr
+      %td= heading.chapter_id
+      %td= heading.order
+      %td= heading.content
+      %td= link_to 'Show', heading
+      %td= link_to 'Edit', edit_heading_path(heading)
+      %td= link_to 'Destroy', heading, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Heading', new_heading_path
