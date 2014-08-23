@@ -30,7 +30,7 @@ class ChapterRenderer < Redcarpet::Render::HTML
     if header_level == 1
       chapter.name = text
     else
-      chapter.headings.build content: header_level, order: node_count
+      chapter.headings.build content: text, order: node_count
       succ_node_count
     end
     nil
@@ -76,7 +76,7 @@ class ChapterRenderer < Redcarpet::Render::HTML
   end
 
   def codespan(code)
-    chapter.codes.build content: code.gsub(/[^\n]/ && /[$\n]/, ""), order: node_count
+    chapter.codes.build content: code, order: node_count
     succ_node_count
     nil
   end

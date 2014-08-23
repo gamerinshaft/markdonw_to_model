@@ -1,9 +1,19 @@
 %p#notice= notice
 
-%p
-  %b Chapter名:
-  = @chapter.name
-
+%p Chapter名:
+= @chapter.name
+%h1 code
+- @chapter.codes.each do |code|
+  %p #{code.content}
+%h1 url
+- @chapter.urls.each do |url|
+  %p #{url.content}
+%h1 quote
+- @chapter.quotations.each do |quote|
+  %p #{quote.content}
+%h1 head
+- @chapter.headings.each do |head|
+  %p #{head.content}
 = link_to 'Edit', edit_chapter_path(@chapter)
 \|
 = link_to 'Back', chapters_path
