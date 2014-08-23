@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Chapter:
+  = @code.chapter_id
+%p
+  %b Order:
+  = @code.order
+%p
+  %b Content:
+  = @code.content
+
+= link_to 'Edit', edit_code_path(@code)
+\|
+= link_to 'Back', codes_path

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Chapter:
+  = @url.chapter_id
+%p
+  %b Order:
+  = @url.order
+%p
+  %b Content:
+  = @url.content
+
+= link_to 'Edit', edit_url_path(@url)
+\|
+= link_to 'Back', urls_path

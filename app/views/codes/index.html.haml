@@ -1,0 +1,23 @@
+%h1 Listing codes
+
+%table
+  %tr
+    %th Chapter
+    %th Order
+    %th Content
+    %th
+    %th
+    %th
+
+  - @codes.each do |code|
+    %tr
+      %td= code.chapter_id
+      %td= code.order
+      %td= code.content
+      %td= link_to 'Show', code
+      %td= link_to 'Edit', edit_code_path(code)
+      %td= link_to 'Destroy', code, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Code', new_code_path

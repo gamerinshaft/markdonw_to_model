@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Chapter:
+  = @quotation.chapter_id
+%p
+  %b Order:
+  = @quotation.order
+%p
+  %b Content:
+  = @quotation.content
+
+= link_to 'Edit', edit_quotation_path(@quotation)
+\|
+= link_to 'Back', quotations_path

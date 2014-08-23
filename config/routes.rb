@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :codes
+
+  resources :quotations
+
+  resources :urls
+
   resources :headings
 
   # The priority is based upon order of creation: first created -> highest priority.
