@@ -28,7 +28,8 @@ class ChaptersController < ApplicationController
     @md = params[:md]
 
     #redCarpet
-    renderer = ChapterRenderer
+    renderer = ChapterRenderer.new
+    renderer.chapter = @chapter
     markdown = Redcarpet::Markdown.new(renderer, extensions = {})
     convert_text = markdown.render(@md)
 
