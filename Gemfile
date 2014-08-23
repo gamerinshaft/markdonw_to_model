@@ -40,3 +40,4 @@ gem 'spring',        group: :development
 
 # User Add
 gem 'haml-rails'
+gem 'redcarpet'
