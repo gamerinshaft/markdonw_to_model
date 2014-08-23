@@ -4,6 +4,8 @@ class CreateUrls < ActiveRecord::Migration
       t.integer :chapter_id
       t.integer :order
       t.text :content
+      t.text :link
+      t.text :title
 
       t.timestamps
     end

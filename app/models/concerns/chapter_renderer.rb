@@ -30,7 +30,7 @@ class ChapterRenderer < Redcarpet::Render::HTML
     if header_level == 1
       chapter.name = text
     else
-      chapter.headings.build content: text, order: node_count
+      chapter.headings.build content: text, level: header_level, order: node_count
       succ_node_count
     end
     nil
@@ -102,7 +102,7 @@ class ChapterRenderer < Redcarpet::Render::HTML
   end
 
   def link(link, title, content)
-    chapter.urls.build content: "#{content}(#{link})", order: node_count
+    chapter.urls.build link: link, title: title, content: content, order: node_count
     succ_node_count
     nil
   end

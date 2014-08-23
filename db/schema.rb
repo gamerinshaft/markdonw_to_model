@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140823044927) do
   create_table "headings", force: true do |t|
     t.integer  "chapter_id"
     t.integer  "order"
+    t.integer  "level"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -47,6 +48,8 @@ ActiveRecord::Schema.define(version: 20140823044927) do
     t.integer  "chapter_id"
     t.integer  "order"
     t.text     "content"
+    t.text     "link"
+    t.text     "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
